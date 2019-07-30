@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.1
+//じゃんけんゲーム1.2
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,7 +23,7 @@ int main(){
     strcpy(humhand,"チョキ");
   else
     strcpy(humhand,"パー");
-  printf("%s\n",humhand);
+  printf("は%s\n",humhand);
 
   srand(time(NULL));
   com = rand()%3 + 1;
@@ -48,18 +48,20 @@ int hanbetu(char moji[]){
   int mi=1,num=1;
   pp = moji;
 
-  printf("%sは",pp);
+  printf("%s",pp);
   while((*pp!='\0')&&(*pp>='0'&&*pp<='9')){
     pp++;
     mi++;
     num++;
   }
+
   if(*pp=='\0' && mi!=1){
-    if(*(pp-1)>='1'&&*(pp-1)<='3'&&mi==2)
-      return 0;
-    puts("0か1~3以外の正の整数です\n1〜3の整数を入力してください\n");
-    return 1;
+    if(atoi(moji)>=1 &&atoi(moji)<=3)
+      goto finish;
+    puts("は0か1~3以外の正の整数です\n1〜3の整数を入力してください\n");
+    goto end;
   }
+
   else if(*pp==my && mi==1){
     pp++;
     while(*pp!='\0'&&((*pp>='0'&&*pp<='9')||*pp==nn)){
@@ -67,23 +69,32 @@ int hanbetu(char moji[]){
       mi++;
     }
     if(*pp=='\0'&&mi!=num){
-      puts("負の数です\n1〜3の整数を入力してください\n");
-      return 1;
+      puts("は負の数です\n1〜3の整数を入力してください\n");
+      goto end;
     }
   }
+
   else if(*pp==nn){
     pp++;
     while((*pp!='\0')&&(*pp>='0'&&*pp<='9'))
       pp++;
     if(*pp=='\0'){
-      puts("小数です\n1〜3の整数を入力してください\n");
-      return 1;
+      if(atof(moji)==1.0||atof(moji)==2.0||atof(moji)==3.0){
+        goto finish;
+      }
+      puts("は小数です\n1〜3の整数を入力してください\n");
+      goto end;
     }
   }
+
   else if(mi==1 && *pp=='\0'){
-    puts("んべつできません。\n1〜3の整数を入力してください\n");
-    return 1;
+    puts("判別できません。\n1〜3の整数を入力してください\n");
+    goto end;
   }
-  puts("文字列です\n1〜3の整数を入力してください\n");
-  return 1;
+  
+  puts("は文字列です\n1〜3の整数を入力してください\n");
+  end:
+    return 1;
+  finish:
+    return 0;
 }
