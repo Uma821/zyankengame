@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.2
+//じゃんけんゲーム1.3
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -44,11 +44,11 @@ int main(){
 }
 
 int hanbetu(char moji[]){
-  char *pp,nn='.',my='-';
-  int mi=1,num=1;
+  char *pp, nn='.', my='-';
+  int mi=1, num=1;
   pp = moji;
 
-  printf("%s",pp);
+  printf("「%s」",pp);
   while((*pp!='\0')&&(*pp>='0'&&*pp<='9')){
     pp++;
     mi++;
@@ -56,9 +56,9 @@ int hanbetu(char moji[]){
   }
 
   if(*pp=='\0' && mi!=1){
-    if(atoi(moji)>=1 &&atoi(moji)<=3)
+    if(atoi(moji)>=1 && atoi(moji)<=3)
       goto finish;
-    puts("は0か1~3以外の正の整数です\n1〜3の整数を入力してください\n");
+    puts("は0か1～3以外の正の整数です\n1～3の整数を入力してください\n");
     goto end;
   }
 
@@ -68,8 +68,8 @@ int hanbetu(char moji[]){
       pp++;
       mi++;
     }
-    if(*pp=='\0'&&mi!=num){
-      puts("は負の数です\n1〜3の整数を入力してください\n");
+    if(*pp=='\0' && mi!=num){
+      puts("は負の数です\n1～3の整数を入力してください\n");
       goto end;
     }
   }
@@ -82,17 +82,26 @@ int hanbetu(char moji[]){
       if(atof(moji)==1.0||atof(moji)==2.0||atof(moji)==3.0){
         goto finish;
       }
-      puts("は小数です\n1〜3の整数を入力してください\n");
+      puts("は小数です\n1～3の整数を入力してください\n");
       goto end;
     }
   }
 
   else if(mi==1 && *pp=='\0'){
-    puts("判別できません。\n1〜3の整数を入力してください\n");
+    puts("判別できません。\n1～3の整数を入力してください\n");
     goto end;
   }
+
+  if(*pp==' '){
+    while(*pp!='\0' && *pp==' ')
+      pp++;
+    if(*pp=='\0'){
+      puts("はすべて半角空白です。\n1～3の整数を入力してください\n");
+      goto end;
+    }
+  }
   
-  puts("は文字列です\n1〜3の整数を入力してください\n");
+  puts("は文字列です\n1～3の整数を入力してください\n");
   end:
     return 1;
   finish:
