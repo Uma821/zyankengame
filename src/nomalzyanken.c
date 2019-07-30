@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.5
+//じゃんけんゲーム1.4.2
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
