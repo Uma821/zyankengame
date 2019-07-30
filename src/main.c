@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.3
+//じゃんけんゲーム1.4
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -64,6 +64,7 @@ int hanbetu(char moji[]){
 
   else if(*pp==my && mi==1){
     pp++;
+    mi++;
     while(*pp!='\0'&&((*pp>='0'&&*pp<='9')||*pp==nn)){
       pp++;
       mi++;
@@ -76,8 +77,11 @@ int hanbetu(char moji[]){
 
   else if(*pp==nn){
     pp++;
-    while((*pp!='\0')&&(*pp>='0'&&*pp<='9'))
+    mi++;
+    while((*pp!='\0')&&(*pp>='0'&&*pp<='9')){
       pp++;
+      mi++;
+    }
     if(*pp=='\0'){
       if(atof(moji)==1.0||atof(moji)==2.0||atof(moji)==3.0){
         goto finish;
@@ -92,11 +96,22 @@ int hanbetu(char moji[]){
     goto end;
   }
 
-  if(*pp==' '){
-    while(*pp!='\0' && *pp==' ')
+  if(*pp==' ' && mi==1){
+    while(*pp!='\0' && *pp==' '){
       pp++;
+      mi++;
+    }
     if(*pp=='\0'){
       puts("はすべて半角空白です。\n1～3の整数を入力してください\n");
+      goto end;
+    }
+  }
+
+  if(*pp=='\x81' && *(pp+1)=='\x40' && mi==1){
+    while(*pp!='\0' && *pp=='\x81' && *(pp+1)=='\x40')
+      pp += 2;
+    if(*pp=='\0'){
+      puts("はすべて全角空白です。\n1～3の整数を入力してください\n");
       goto end;
     }
   }
