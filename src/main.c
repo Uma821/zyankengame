@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.0
+//じゃんけんゲーム1.1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,10 +54,10 @@ int hanbetu(char moji[]){
     mi++;
     num++;
   }
-  if(*pp=='\0'){
+  if(*pp=='\0' && mi!=1){
     if(*(pp-1)>='1'&&*(pp-1)<='3'&&mi==2)
       return 0;
-    puts("0か1~3以外の正の整数です\n1~3を入力してください\n");
+    puts("0か1~3以外の正の整数です\n1〜3の整数を入力してください\n");
     return 1;
   }
   else if(*pp==my && mi==1){
@@ -67,7 +67,7 @@ int hanbetu(char moji[]){
       mi++;
     }
     if(*pp=='\0'&&mi!=num){
-      puts("負の数です\n1~3を入力してください\n");
+      puts("負の数です\n1〜3の整数を入力してください\n");
       return 1;
     }
   }
@@ -76,10 +76,14 @@ int hanbetu(char moji[]){
     while((*pp!='\0')&&(*pp>='0'&&*pp<='9'))
       pp++;
     if(*pp=='\0'){
-      puts("小数です\n1~3を入力してください\n");
+      puts("小数です\n1〜3の整数を入力してください\n");
       return 1;
     }
   }
-  puts("文字列です\n1~3を入力してください\n");
+  else if(mi==1 && *pp=='\0'){
+    puts("んべつできません。\n1〜3の整数を入力してください\n");
+    return 1;
+  }
+  puts("文字列です\n1〜3の整数を入力してください\n");
   return 1;
 }
