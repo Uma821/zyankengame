@@ -1,4 +1,4 @@
-//じゃんけんゲーム1.4
+//じゃんけんゲーム1.4.1
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -107,9 +107,9 @@ int hanbetu(char moji[]){
     }
   }
 
-  if(*pp=='\x81' && *(pp+1)=='\x40' && mi==1){
-    while(*pp!='\0' && *pp=='\x81' && *(pp+1)=='\x40')
-      pp += 2;
+  if(*pp=='\xE3' && *(pp+1)=='\x80' && *(pp+2)=='\x80' && mi==1){
+    while(*pp!='\0' && *pp=='\xE3' && *(pp+1)=='\x80' && *(pp+2)=='\x80')
+      pp += 3;
     if(*pp=='\0'){
       puts("はすべて全角空白です。\n1～3の整数を入力してください\n");
       goto end;
